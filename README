@@ -1,12 +1,12 @@
+JSMF - JavaScript State Management Framework
+
 NOTE: This project was originally created in 2004.  It's no longer being
 actively maintained as MANY mature JS frameworks have come along that
 probably eliminate the need for client->server side persistence like this.
 But, it's here for historical purposes and free to be used as a reference
 point for Javascript-based APIs.
 
-JSMF - JavaScript State Management Framework
-
-   What is JSMF? (TOP)
+   What is JSMF?
 
    JSMF (JavaScript State Management Framework) provides your web-based
    applications with a comprehensive mechanism to maintain state. This
@@ -14,3 +14,4 @@ JSMF - JavaScript State Management Framework
    forms, DHTML and an OO (object oriented) JavaScript API. The API
    provides a standardized way to read, write, and persist session data.
 
+   (See jsmf.html for more details)
