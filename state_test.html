@@ -1,0 +1,432 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <script language="JavaScript" src="state_manager.js" type=
+  "text/javascript">
+  </script>
+  <style>
+    .text {
+    	FONT-SIZE: 11px; FONT-FAMILY: verdana,arial,helvetica,sans-serif
+    }
+    td {
+    	FONT-SIZE: 11px; FONT-FAMILY: verdana,geneva,arial,helvetica,sans-serif
+    }    
+   
+    body, table, td, th, p, div, small, big, ul { font-family: verdana,arial,sans-serif; }
+    
+  </style>
+  <title>JSMF - JavaScript State Management Framework</title>
+  <meta name="author" content="Eric T. Blue">
+  <meta name="keywords" content="JSMF,javascript,state,manage,iframe,frame,form,DHTML">
+</head>
+<body>
+<!-- 
+JSMF - JavaScript State Management Framework
+$Id: state_test.html,v 1.2 2004-10-04 00:51:39 eblue Exp $ 
+-->
+  <script language="JavaScript" type="text/javascript">
+    // Make global
+    var sm = undefined;
+
+    function getRadioOption(obj) {
+    
+        for(var i = 0; i < obj.length; i++) {       
+            if (obj[i].checked) {
+                return(obj[i].value);
+            }
+        }
+    
+        return null;
+    
+    }
+
+  </script>
+
+  <h2>JSMF - JavaScript State Management Framework</h2>
+  <h3>Test Engine</h3>
+
+  <table>
+    <tr>
+      <td>
+        <table border="1" width="500" cellspacing="2"
+               cellpadding="5">
+          <tr>
+            <td valign="top">
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>new()</b></td></tr></table>
+              <p>
+              <form name="init_form">
+               <input type="hidden" name="name" value="value1">
+              </form>
+              <form name="init_options">
+                  <i>method</i><br>
+                  <input type="radio" name="type" value="url" checked>URL
+                  <br>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="text" name="url" value="variables.html" size="40">
+                  <br>
+                  <input type="radio" name="type" value="form">Form
+                  <br>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input readonly type="text" name="form" value="document.forms['init_form']" size="40">
+                  <br>
+                  <input type="radio" name="type" value="hash">Hash
+                  <br>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <input type="text" name="hash" value="name=value1,name2=value2" size="40">
+                  <br>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <br>
+                  <i>frame type</i><br>
+                  <input type="radio" name="frame_type" value="frame" checked>
+                  <small>Frame</small>
+                  &nbsp;
+                  <input type="radio" name="frame_type" value="iframe" checked>
+                  <small>IFrame</small>
+                  <br>
+                  <br>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <small>Peek</small> <input name="peek" type="checkbox">
+                   <script>
+                   if (isDefined(parent.main)) {
+                       document.forms['init_options'].frame_type[0].checked = true;
+                   }
+
+                   </script>
+              </form>
+
+              </td>
+
+            <td>
+              <table>
+                <tr>
+                  <td>
+                     <input type="button" value="Test" onclick=" 
+                      
+                      var type = getRadioOption(document.forms['init_options'].type);
+
+                      if (type == 'url') {
+                        initParams.type = 'url'; 
+                        initParams.url = document.forms['init_options'].url.value;
+                      }
+                      if (type == 'form') {
+                        initParams.type = 'form'; 
+                        initParams.form = document.forms['init_form'];
+                      }
+                      if (type == 'hash') {
+                        initParams.type = 'hash'; 
+                        initParams.hashString = document.forms['init_options'].hash.value;
+                      }
+
+                       var frameType = getRadioOption(document.forms['init_options'].frame_type);
+                       initParams.frameType = frameType;
+                       if (frameType == 'frame') {
+                           initParams.frame = 'state_manager_frame';
+                       }
+                       if (frameType == 'iframe') {
+                           initParams.frame = 'state_manager';
+                       }
+
+                      initParams.debug = 1;
+                      sm = new stateManager(initParams);
+                      if (document.forms['init_options'].peek.checked) {
+                        sm.peek(1,150,250);
+                      }
+                      
+                      if (sm.debug()) {
+                          alert('initialize: SUCCESS');
+                      }
+                      ">
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>dump()</b></td></tr></table>
+              <p>
+             </td>
+
+            <td><input type="button" value="Test" onclick=
+            "
+              var dumpList = sm.dump();
+              if (sm.debug()) {
+                  alert('dump: \n' + dumpList);
+              }
+              "></td>
+          </tr>
+
+          <tr>
+            <td>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>peek()</b></td></tr></table>
+              <p>
+              <form name="peek">
+              <input type="radio" name="peek_option" value="1" checked>on
+              <small>height</small> <input size=3 type="text" name="height" value="150">
+              <small>width</small> <input size=3 type="text" name="width" value="250">
+              <br>
+              <input type="radio" name="peek_option" value="0">off
+              </form> 
+             </td>
+
+            <td><input type="button" value="Test" onclick="
+              var peek_flag = getRadioOption(document.forms['peek'].peek_option);
+              var height = document.forms['peek'].height.value;
+              var width = document.forms['peek'].width.value;
+              
+              sm.peek(peek_flag,height,width);
+              if (sm.debug()) {
+                  alert('peek: SUCCESS');
+              }
+              "></td>
+          </tr>
+
+          <tr>
+            <td>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>destroy()</b></td></tr></table>
+              <p>
+            </td>
+
+            <td><input type="button" value="Test" onclick=
+            "
+              sm.destroy();
+              if (sm.debug()) {
+                  alert('destroy: SUCCESS');
+              }
+            "></td>
+          </tr>
+          <tr>
+            <td>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>getVariable()</b></td></tr></table>
+              <p>
+              <form name='getVariable'>
+                <table>
+                  <tr>
+                    <td>variable</td>
+
+                    <td><input type="text" name="name"
+                           value="name"></td>
+                  </tr>
+                </table>
+              </form>
+            </td>
+
+            <td><input type="button" value="Test" onclick=
+            " var name = document.forms['getVariable'].name.value; 
+              sm.getVariable(name);">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <form name='setVariable'>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>setVariable()</b></td></tr></table>
+              <p>
+                <table>
+                  <tr>
+                    <td>variable</td>
+
+                    <td><input type="text" name="name"
+                           value="name"></td>
+                  </tr>
+
+                  <tr>
+                    <td>value</td>
+
+                    <td><input type="text" name="value"
+                           value="Mojojojo"></td>
+                  </tr>
+                </table>
+              </form>
+            </td>
+
+            <td><input type="button" value="Test" onclick=
+            " var name = document.forms['setVariable'].name.value;
+              var value = document.forms['setVariable'].value.value; 
+              sm.setVariable(name,value);">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <form name='addVariable'>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>addVariable()</b></td></tr></table>
+              <p>
+                <table>
+                  <tr>
+                    <td>variable</td>
+
+                    <td><input type="text" name="name"
+                           value="add1"></td>
+                  </tr>
+
+                  <tr>
+                    <td>value</td>
+
+                    <td><input type="text" name="value"
+                           value="value1"></td>
+                  </tr>
+                </table>
+              </form>
+            </td>
+
+            <td><input type="button" value="Test" onclick=
+            " var name = document.forms['addVariable'].name.value;
+              var value = document.forms['addVariable'].value.value;
+              sm.addVariable(name,value);
+              if (sm.debug()) {
+                  alert('addVariable: SUCCESS');
+              }
+              ">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <form name='deleteVariable'>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>deleteVariable()</b></td></tr></table>
+              <p>
+                <table>
+                  <tr>
+                    <td>variable</td>
+
+                    <td><input type="text" name="name"
+                           value="add1"></td>
+                  </tr>
+                </table>
+              </form>
+            </td>
+
+            <td><input type="button" value="Test" onclick=
+            " var name = document.forms['deleteVariable'].name.value;
+              sm.deleteVariable(name);
+              if (sm.debug()) {
+                  alert('deleteVariable: SUCCESS');
+              }
+              ">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <form name='saveForm'>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>saveForm()</b></td></tr></table>
+              <p>
+                <table>
+                  <tr>
+                    <td>variable</td>
+
+                    <td><input type="text" name="name" value="saveform"></td>
+                  </tr>
+
+                  <tr>
+                    <td>value</td>
+
+                    <td><input type="text" name="value"
+                           value="value1"></td>
+                  </tr>
+                </table>
+              </form>
+            </td>
+
+            <td><input type="button" value="Test" onclick=
+            " var name = document.forms['saveForm'].name.value;
+              var value = document.forms['saveForm'].value.value;
+              sm.saveForm(document.forms['saveForm']);">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>reset()</b></td></tr></table>
+              <p>            
+             </td>
+
+            <td><input type="button" value="Test" onclick=
+            "
+              sm.reset();
+              if (sm.debug()) {
+                  alert('reset: SUCCESS');
+              }
+              "></td>
+          </tr>
+          <tr>
+            <td>
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>freeze()</b></td></tr></table>
+              <p>
+
+              <form name="freeze">
+              <input type="radio" name="method" value="server" checked> server - url            
+              <br>
+              <input type="text" name="url" size="40"
+                  value="http://127.0.0.1/jsmf/server.cgi?action=freeze">
+              <p>
+              <input type="radio" name="method" value="client"> client - cookie            
+              <br>
+              <input type="text" name="cookie" size="40"
+                  value="state_cookie">
+
+              </form>
+              <br>
+            </td>
+
+            <td><input type="button" value="Test" onclick="
+              var method = getRadioOption(document.forms['freeze']);
+              if (method == 'server') {
+                sm.freeze('server',document.forms['freeze'].url.value);
+              }
+              if (method == 'client') {
+                sm.freeze('client',document.forms['freeze'].cookie.value);
+              }
+
+              if (sm.debug()) {
+                  alert('freeze: SUCCESS');
+              }
+
+              "></td>
+          </tr>
+          <tr>
+            <td> 
+              <table width=100%><tr><td bgcolor="#c0c0c0"><b>thaw()</b></td></tr></table>
+              <p>
+              <form name="thaw">
+              <input type="radio" name="method" value="server" checked> server - url            
+              <br>
+              <input type="text" name="url" size="40"
+                  value="http://127.0.0.1/jsmf/server.cgi?action=thaw">
+              <p>
+              <input type="radio" name="method" value="client"> client - cookie            
+              <br>
+              <input type="text" name="cookie" size="40"
+                  value="state_cookie">
+
+              </form>
+              <br>
+            </td>
+
+            <td><input type="button" value="Test" onclick="
+              var method = getRadioOption(document.forms['thaw']);
+              if (method == 'server') {
+                sm.thaw('server',document.forms['thaw'].url.value);
+              }
+              if (method == 'client') {
+                sm.thaw('client',document.forms['thaw'].cookie.value);
+              }
+
+              if (sm.debug()) {
+                  alert('thaw SUCCESS');
+              }
+
+              ">
+            </td>
+          </tr>          
+        </table>
+      </td>
+
+      <td width="50">&nbsp;</td>
+
+      <td valign="middle">
+       <iframe id="state_manager" name="state_manager" style=
+       "visibility: hidden; border: 1; width: 0px; height: 0px;">
+       </iframe>
+     </td>
+    </tr>
+  </table>
+</body>
+</html>

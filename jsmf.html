@@ -1,0 +1,771 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content=
+    "HTML Tidy for Linux/x86 (vers 1st December 2002), see www.w3.org"
+          name="generator">
+    <style type="text/css">
+    body, table, td, th, p, div, small, big, ul { font-family: verdana,arial,sans-serif; }
+    .toc { font-size: 13px; }    
+    .api { font-size: 13px; }    
+    </style>
+    <title>
+      JSMF - JavaScript State Management Framework
+    </title>
+    <meta name="author" content="Eric T. Blue">
+    <meta name="keywords" content=
+    "JSMF,javascript,state,manage,iframe,frame,form,DHTML">
+  </head>
+  <body>
+    <table width="100%">
+      <tr>
+        <td>
+          <font size="+1"><b>JSMF - JavaScript State Management
+          Framework</b></font>
+        </td>
+        <td align="right">
+          <!--#include virtual="/projects/jsmf/adsense.js" -->
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr valign="top">
+        <td>
+          <br>
+          <a name="toc1"></a> <b>What is
+          JSMF?</b>&nbsp;<small>(<a href="#top">TOP</a>)</small> 
+          <p>
+            JSMF (JavaScript State Management Framework) provides
+            your web-based applications with a comprehensive
+            mechanism to maintain state. This solution is made
+            possible by utilizing frames (standard and inline),
+            forms, DHTML and an OO (object oriented) JavaScript
+            API. The API provides a standardized way to read,
+            write, and persist session data.<br>
+            <br>
+             <a name="toc2"></a> <b>Why do I need to maintain
+            state?</b>&nbsp;<small>(<a href="#top">TOP</a>)</small>
+          </p>
+          <p>
+            During the lifetime of a session within a web-based
+            application, it's often necessary to save and retrieve
+            a particular set of variables. After a webpage performs
+            a form POST or GET, the variables you wish to save will
+            need to be regenerated again server-side and, more than
+            likely, stored as hidden form variables in the
+            subsequent page. These variables may be required across
+            multiple pages in order to identify a particular user,
+            order, or to present a final confirmation page in a
+            wizard-style application flow.<br>
+            <br>
+          </p>
+        </td>
+        <td width="20">
+          &nbsp;
+        </td>
+        <td>
+          <br>
+          <small><b>Table of Contents</b></small>
+          <table width="250" border="1">
+            <tr bgcolor="#F0FFF0">
+              <td>
+                <table border="0" class="toc">
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc1">What is JSMF?</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc2">Why do I need to maintain
+                      state?</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc3">What is unique about
+                      JSMF?</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc4">What are the benefits of
+                      using JSMF?</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc5">Getting Started</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc6">Test Engine</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc7">API</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc8">Browser Compatibility</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc9">Download</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="10">
+                      &nbsp;
+                    </td>
+                    <td>
+                      <a href="#toc10">Feedback</a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td width="20">
+          &nbsp;
+        </td>
+      </tr>
+    </table>
+    <p>
+      <a name="toc3"></a> <b>What is unique about
+      JSMF?</b>&nbsp;<small>(<a href="#top">TOP</a>)</small>
+    </p>
+    <p>
+      JSMF leverages existing client-side technologies (frames,
+      forms, DHTML, and JavaScript) to accomplish state management.
+      Developers have been using very similar techniques with
+      hidden frames and cookies over the years. But, what JSMF does
+      is combine these techniques and provides a simple to use API
+      that abstracts much of the JavaScript and DOM details that
+      can be daunting at times.<br>
+      <br>
+       <a name="toc4"></a> <b>What are the benefits of using
+      JSMF?</b>&nbsp;<small>(<a href="#top">TOP</a>)</small>
+    </p>
+    <p>
+      JSMF provides the following features and benefits:<br>
+    </p>
+    <blockquote>
+      <ul class="noindent">
+        <li>
+          Provides client-side storage and caching of session data
+          (form variables).
+        </li>
+        <li>
+          Provides multiple data persistence ("freeze" and "thaw")
+          mechanisms. Client-side method uses cookies, while
+          server-side method can be implemented in any number of
+          ways.
+        </li>
+        <li>
+          Reduces server-side processing and state logic.
+        </li>
+        <li>
+          Allows all frames within a given page to easily access
+          and exchange data.
+        </li>
+      </ul>
+    </blockquote><br>
+     <a name="toc5"></a> <b>Getting
+    Started</b>&nbsp;<small>(<a href="#top">TOP</a>)</small> 
+    <p>
+      JSMF can be used in a framed environment, and can work with
+      both standard and inline frames. The following example
+      illustrates how to initialize the state manager with an
+      embedded iframe. Setting up the JSMF environment only
+      requires a few steps:
+    </p>
+    <blockquote>
+      1) Include the state_manager.js script in your application /
+      webpage.<br>
+       
+      <blockquote>
+        <table border="1" width="700" bgcolor="#F0FFF0">
+          <tr>
+            <td>
+              <pre>
+          &lt;script language="JavaScript" src="state_manager.js" type="text/javascript"&gt;
+          &lt;/script&gt;    
+</pre>
+</td>
+          </tr>
+        </table>
+      </blockquote>2) Insert a hidden iframe.<br>
+       
+      <blockquote>
+        <table border="1" width="700" bgcolor="#F0FFF0">
+          <tr>
+            <td>
+              <pre>
+    
+       &lt;iframe id="state_manager" name="state_manager" style=
+       "visibility: hidden; border: 1; width: 0px; height: 0px;"&gt;
+       &lt;/iframe&gt;
+</pre>
+</td>
+          </tr>
+        </table>
+      </blockquote>3) Create the state manager object at body
+      onLoad or as an embedded script. 
+      <blockquote>
+        <table border="1" width="700" bgcolor="#F0FFF0">
+          <tr>
+            <td>
+              <pre>
+        
+           &lt;script language="JavaScript" type="text/javascript"&gt;
+    
+            var initParams = new Object();
+    
+            initParams.type = 'url';
+            initParams.url = 'variables.html';
+            initParams.frameType = 'iframe';
+            initParams.frame = 'state_manager;
+    
+            var sm = new stateManager(initParams);
+    
+          &lt;/script&gt; 
+</pre>
+</td>
+          </tr>
+        </table><br>
+         That's all there is to it! See the following Test Engine
+        and API sections for details on using the state manager
+        object.
+      </blockquote><br>
+    </blockquote><br>
+    <br>
+     <a name="toc6"></a> <b>Test
+       Engine</b>&nbsp;<small>(<a href="#top">TOP</a>)</small> 
+    <p>
+      The following links provide a sample test engine that
+      illustrates how to invoke the JSMF API:
+    </p>
+    <blockquote>
+      <a target="newwin" href="state_test.html">Inline Frame -
+      IFrame Test</a><br>
+      <br>
+       <a target="newwin" href="state_test_frame.html">Standard
+      Frame - Frame Test</a>
+    </blockquote><br>
+    <br>
+     <a name="toc7"></a> <b>API</b>&nbsp;<small>(<a href=
+    "#top">TOP</a>)</small> 
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>new()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Constructs state manager object.<br>
+      <br>
+       <b>Parameters</b>: initParams (Object)<br>
+      <br></small>
+      <blockquote>
+        <small>initParams.debug = debug level<br>
+         initParams.frameType = values := ['iframe','frame']<br>
+         initParams.frame = name of frame<br>
+         initParams.type = values := ['url','form','hash']<br>
+         initParams.url = URL to initialize form<br>
+         initParams.form = form object (document.forms[0])<br>
+         initParams.hashString = key value string
+        ('name1=value1,name2=value2')<br></small>
+      </blockquote><br>
+       <b>Returns</b>: stateManager (Object)<br>
+      <br>
+       <b>Usage</b>:<br>
+        
+      <pre>
+    
+    var initParams = new Object();
+    
+    initParams.type = 'url';
+    initParams.url = 'variables.html';
+    initParams.frameType = 'iframe';
+    initParams.frame = 'state_manager;
+
+    var sm = new stateManager(initParams);
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>addVariable()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Adds new variable to state manager.<br>
+      <br>
+       <b>Parameters</b>: name (String), value (String)<br>
+      <br>
+       <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    sm.addVariable('new_variable','new_value');
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>debug()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Sets debug level for state manager object.<br>
+      <br>
+       <b>Parameters</b>: debug_flag (Integer) [0 = off, 1 =
+      on]<br>
+      <br>
+       <b>Returns</b>: debug_flag (Integer)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    // Set debug level
+    sm.debug(1);
+
+    // Get debug level
+    var level = sm.debug();
+
+</pre>
+</blockquote><br>
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>deleteVariable()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Deletes existing variable from state manager.<br>
+      <br>
+       <b>Parameters</b>: name (String)<br>
+      <br>
+       <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    sm.deleteVariable('variable');
+
+</pre>
+</blockquote><br>
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>destroy()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Deconstructs/Destroys state manager object.<br>
+      <br>
+       <b>Parameters</b>: <i>none</i><br>
+      <br>
+       <b>Returns</b>: nothing<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    sm.destroy();
+
+</pre>
+</blockquote><br>
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>dump()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Returns string of name value pairs in state
+      manager.<br>
+      <br>
+       <b>Parameters</b>: none<br>
+      <br>
+       <b>Returns</b>: dumpList (String)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    if ( sm.debug() ) {
+        alert(sm.dump());
+    }
+
+</pre>
+</blockquote><br>
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>freeze()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Freezes state manager data for later use.<br>
+       Supports both client-side and server-side freezing.<br>
+      <br>
+       <b>Parameters</b>: method (String), parameters (String)<br>
+      <br></small>
+      <blockquote>
+        <small>method = values := ['client','server']<br>
+         parameters = values := [cookie_name,
+        server_url]<br></small>
+      </blockquote> <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br>
+        
+      <pre>
+    
+    // Client freeze
+    sm.freeze('client','cookie_name');
+
+    // Server freeze
+    sm.freeze('server','http://127.0.0.1/jsmf/server.cgi?action=freeze');
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>getVariable()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Gets variable value.<br>
+      <br>
+       <b>Parameters</b>: name (String)<br>
+      <br>
+       <b>Returns</b>: value (String)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    var value = sm.getVariable('variable');
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>makeForm()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Creates an empty form inside the state manager
+      frame.<br>
+      <br>
+       <b>Parameters</b>: none<br>
+      <br>
+       <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    sm.makeForm();
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>makeFormInput()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Creates hidden variable inside state manager form.<br>
+      <br>
+       <b>Parameters</b>: name (String), value (String)<br>
+      <br>
+       <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    sm.makeFormInput('name','value');
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>peek()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Makes frame visible for debugging purposes.<br>
+       Currently supports iframe only.<br>
+      <br>
+       <b>Parameters</b>: flagOn (Integer), Height (Integer), Width
+      (Integer)<br>
+      <br>
+       <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    // Peek on
+    sm.peek(1,100,250);
+
+    // Peek off
+    sm.peek(0,0,0);
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>reset()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Resets state manager object and clears all
+      variables.<br>
+      <br>
+       <b>Parameters</b>: none<br>
+      <br>
+       <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    sm.reset();
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>saveForm()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Stores existing form object into state manager;<br>
+      <br>
+       <b>Parameters</b>: form (formObject)<br>
+      <br>
+       <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    sm.saveForm(document.forms[0]);
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>saveToHash()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Saves state manager variables as a hash<br>
+      <br>
+       <b>Parameters</b>: none<br>
+      <br>
+       <b>Returns</b>: hash (Hash)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+        
+    var hash = sm.saveToHash();
+
+    for ( key in hash ) {
+        alert(key + ' = ' + hash[key] + '\n');
+    }
+
+</pre>
+</blockquote><br>
+     
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>setVariable()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Sets variable value.<br>
+      <br>
+       <b>Parameters</b>: name (String), value (String)<br>
+      <br>
+       <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br></small> 
+      <pre>
+    
+    sm.setVariable('variable','value');
+
+</pre>
+</blockquote><br>
+    <hr width="500" align="left">
+    <table width="500" border="1" bgcolor="#FFF0FF" class="api">
+      <tr>
+        <td>
+          <b>thaw()</b>
+        </td>
+      </tr>
+    </table>
+    <hr width="500" align="left">
+    <br>
+    <blockquote>
+      <small>Thaws state manager data.<br>
+       Supports both client-side and server-side thawing.<br>
+      <br>
+       <b>Parameters</b>: method (String), parameters (String)<br>
+      <br></small>
+      <blockquote>
+        <small>method = values := ['client','server']<br>
+         parameters = values := [cookie_name,
+        server_url]<br></small>
+      </blockquote> <b>Returns</b>: true|false (Boolean)<br>
+      <br>
+       <b>Usage</b>:<br>
+        
+      <pre>
+    
+    // Client freeze
+    sm.thaw('client','cookie_name');
+
+    // Server freeze
+    sm.thaw('server','http://127.0.0.1/jsmf/server.cgi?action=thaw');
+
+</pre>
+</blockquote><br>
+    <br>
+     <a name="toc8"></a> <b>Browser
+    Compatibility</b>&nbsp;<small>(<a href="#top">TOP</a>)</small> 
+    <p>
+      This version of JSMF is a preliminary release and has only
+      been tested with Internet Explorer version 6.0 (SP1) and
+      Mozilla Firefox version 1.0 (Preview Release). Since browser
+      compatibility is very important, other browsers will be
+      tested and future releases will include compatibility fixes
+      as they are needed.<br>
+      <br>
+       <a name="toc9"></a> <b>Download</b>&nbsp;<small>(<a href=
+      "#top">TOP</a>)</small>
+    </p>
+    <p>
+      Click (<a href="jsmf.zip">Here</a>) to download version 1.0
+      of JSMF.<br>
+      <br>
+       <a name="toc10"></a>
+         <b>Feedback</b>&nbsp;<small>(<a href="#top">TOP</a>)</small>
+    </p>
+    <p>
+      Comments, suggestions, and contributions are always welcome.
+      Please email them to <b>erictblue</b> at
+      <b>users.sourceforge.net</b>.<br>
+      <br>
+    </p>
+  </body>
+</html>
